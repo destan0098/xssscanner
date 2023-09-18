@@ -6,8 +6,11 @@ import (
 	"github.com/TwiN/go-color"
 	"os"
 	"strings"
-	"xssscanner/Core/GetScan"
-	"xssscanner/Core/PostScan"
+
+	"github.com/destan0098/xssscanner/Core/GetScan"
+	"github.com/destan0098/xssscanner/Core/PostScan"
+
+
 )
 
 // //////Develed For Test By Omid Z
