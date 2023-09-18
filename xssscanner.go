@@ -9,8 +9,6 @@ import (
 
 	"github.com/destan0098/xssscanner/Core/GetScan"
 	"github.com/destan0098/xssscanner/Core/PostScan"
-
-
 )
 
 // //////Develed For Test By Omid Z
@@ -37,14 +35,14 @@ func main() {
 	fmt.Println(color.Colorize(color.Green, `xssscanner -url="https://Test.com" -method="GET" or "POST" -parameter="seaech"`))
 	fmt.Println(color.Colorize(color.Red, `If You have more than 1 Parameter In POST method separate with & `))
 	fmt.Println(color.Colorize(color.Red, `For Dump All Result To File add -o Parameter  `))
-	fmt.Println(color.Colorize(color.Red, `Like xssscanner -o -url="https://Test.com" -method="GET" or "POST" -parameter="seaech"`))
+	fmt.Println(color.Colorize(color.Red, `Like xssscanner -o "outputfile" -url="https://Test.com" -method="GET" or "POST" -parameter="seaech"`))
 
 	fmt.Println(color.Colorize(color.Yellow, "******************************************************************************"))
 
 	website := flag.String("url", "https://test.com", "WebSite Url To Scan")
 	method := flag.String("method", "GET", "Method To Test")
 	parameters := flag.String("parameter", "q", "Parameters To Scan")
-	fileoutput := flag.Bool("o", false, "Parameters To Save Into File")
+	fileoutput := flag.String("o", "out.txt", "Parameters To Save Into File")
 	flag.Parse()
 
 	if *website == "https://test.com" {

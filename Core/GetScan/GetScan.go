@@ -10,7 +10,6 @@ import (
 	"os"
 	"regexp"
 	"strings"
-	"time"
 )
 
 func errormanager(err error) {
@@ -20,7 +19,7 @@ func errormanager(err error) {
 var fo *os.File
 var path string
 
-func Scan(website string, parameter []string, outputfile bool) {
+func Scan(website string, parameter []string, outputfile string) {
 	Payloadfile := "xssscanner/Core/GetScan/XssPayloads.txt"
 	Payload, err := os.Open(Payloadfile)
 	if err != nil {
@@ -100,30 +99,28 @@ func Scan(website string, parameter []string, outputfile bool) {
 
 						fmt.Println(color.Colorize(color.Green, "******************************************************"))
 
-						if outputfile {
-							currentTime := time.Now()
-							name := fmt.Sprintf("%v", currentTime.Format("2006-01-02-15-01"))
+						name := outputfile
 
-							fo, err = os.OpenFile(name+".txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0777)
-							if err != nil {
+						fo, err = os.OpenFile(name, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0777)
+						if err != nil {
 
-								errormanager(err)
-								fmt.Println(color.Colorize(color.Red, "[-] Error In Permission To Open File"))
-							}
-							defer func(fo *os.File) {
-								err := fo.Close()
-								if err != nil {
-
-								}
-							}(fo)
-
-							outlast := output + "\n" + outputlink + "\n" + "*******************************************************************\n"
-
-							_, err = fmt.Fprint(fo, outlast)
-							if err != nil {
-								errormanager(err)
-							}
+							errormanager(err)
+							fmt.Println(color.Colorize(color.Red, "[-] Error In Permission To Open File"))
 						}
+						defer func(fo *os.File) {
+							err := fo.Close()
+							if err != nil {
+
+							}
+						}(fo)
+
+						outlast := output + "\n" + outputlink + "\n" + "*******************************************************************\n"
+
+						_, err = fmt.Fprint(fo, outlast)
+						if err != nil {
+							errormanager(err)
+						}
+
 						break
 					}
 
