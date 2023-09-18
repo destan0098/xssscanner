@@ -23,7 +23,7 @@ var data url.Values
 var fo *os.File
 
 func Scan(website string, parameter []string, outputfile bool) {
-	Payloadfile := "Core/GetScan/XssPayloads.txt"
+	Payloadfile := "xssscanner/Core/GetScan/XssPayloads.txt"
 	Payload, err := os.Open(Payloadfile)
 	if err != nil {
 		errormanager(err)
