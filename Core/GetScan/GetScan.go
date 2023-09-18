@@ -7,7 +7,6 @@ import (
 
 	"io/ioutil"
 	"net/http"
-	"net/url"
 	"os"
 	"regexp"
 	"strings"
@@ -43,7 +42,7 @@ func Scan(website string, parameter []string, outputfile bool) {
 		PayloadBuf.Split(bufio.ScanLines)
 		for PayloadBuf.Scan() {
 			Payl := PayloadBuf.Text()
-			params := url.QueryEscape(Payl)
+			params := Payl
 			if strings.HasSuffix(website, "&") {
 				if len(parameter) == 1 {
 					path = fmt.Sprintf(website+parameter[0]+"=%s", params)
