@@ -12,6 +12,7 @@ import (
 	"strings"
 )
 
+// errormanager is a utility function to print error messages.
 func errormanager(err error) {
 	fmt.Println("[-] " + err.Error())
 }
@@ -19,6 +20,7 @@ func errormanager(err error) {
 var fo *os.File
 var path string
 
+// Scan scans a website for XSS vulnerabilities using GET requests.
 func Scan(website string, parameter []string, outputfile string) {
 	Payloadfile := "xssscanner/Core/GetScan/XssPayloads.txt"
 	Payload, err := os.Open(Payloadfile)
