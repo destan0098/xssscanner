@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"github.com/TwiN/go-color"
 	"github.com/destan0098/xssscanner/pkg/Core/GetScan"
@@ -95,8 +94,6 @@ func main() {
 		fmt.Printf("Error: %v\n", err)
 	}
 	// Define command-line flags for URL, method, parameters, and output file.
-
-	flag.Parse()
 
 	// Check if a valid website URL is provided.
 	if website == "https://test.com" {
