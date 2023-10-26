@@ -24,7 +24,7 @@ var fo *os.File
 
 // Scan scans a website for XSS vulnerabilities using POST requests.
 func Scan(website string, parameter []string, outputfile string) {
-	Payloadfile := "xssscanner/Core/GetScan/XssPayloads.txt"
+	Payloadfile := "./pkg/Core/GetScan/XssPayloads.txt"
 	Payload, err := os.Open(Payloadfile)
 	if err != nil {
 		errormanager(err)

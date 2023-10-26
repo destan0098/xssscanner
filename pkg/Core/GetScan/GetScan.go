@@ -4,9 +4,9 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/TwiN/go-color"
-
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"os"
 	"regexp"
 	"strings"
@@ -22,7 +22,8 @@ var path string
 
 // Scan scans a website for XSS vulnerabilities using GET requests.
 func Scan(website string, parameter []string, outputfile string) {
-	Payloadfile := "xssscanner/Core/GetScan/XssPayloads.txt"
+	Payloadfile := "./pkg/Core/GetScan/XssPayloads.txt"
+
 	Payload, err := os.Open(Payloadfile)
 	if err != nil {
 		errormanager(err)
@@ -43,7 +44,7 @@ func Scan(website string, parameter []string, outputfile string) {
 		PayloadBuf.Split(bufio.ScanLines)
 		for PayloadBuf.Scan() {
 			Payl := PayloadBuf.Text()
-			params := Payl
+			params := url.QueryEscape(Payl)
 			if strings.HasSuffix(website, "&") {
 				if len(parameter) == 1 {
 					path = fmt.Sprintf(website+parameter[0]+"=%s", params)
@@ -72,6 +73,7 @@ func Scan(website string, parameter []string, outputfile string) {
 			}
 
 			//
+
 			resp, erer := http.Get(path)
 			if erer != nil {
 				errormanager(erer)
